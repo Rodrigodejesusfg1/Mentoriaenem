@@ -5,23 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Mentoria ENEM 750+</title>
     <meta name="description" content="Mentoria personalizada para o ENEM com simulados de IA, plano de estudos adaptável e suporte para alcançar 750+ pontos.">
-    <!--  Links para folhas de estilo, fontes, etc., devem vir ANTES de qualquer estilo incorporado -->
-    <!--  (Se você tivesse, por exemplo, um reset.css ou normalize.css, ele viria aqui) -->
 
     <style>
         /* ============ FONTS ============ */
         @font-face {
             font-family: "BradleyHandITC";
-            /* Ajuste o caminho dos arquivos da fonte conforme necessário */
-            /* Se você tem apenas UMA versão da fonte, não precisa do src: local */
-            /* Use WOFF2 como formato preferencial (melhor compressão) */
             src: url("path/to/BradleyHandITC.woff2") format("woff2");
             font-weight: normal;
             font-style: normal;
-            /* font-display: swap;  // Altamente recomendado para performance! */
+            font-display: swap; /* Melhor para performance */
         }
 
-        /* ============ VARIÁVEIS CSS (CUSTOM PROPERTIES) ============ */
+        /* ============ VARIÁVEIS CSS ============ */
         :root {
             --heading-font: "BradleyHandITC", cursive;
             --body-font: Arial, sans-serif;
@@ -33,58 +28,50 @@
             --secondary-bg: #fafafa;
             --border-radius: 8px;
             --shadow-color: rgba(0, 0, 0, 0.1);
-            --spacing-unit: 1rem; /* Boa prática: use rem para espaçamento */
+            --spacing-unit: 1rem;
+            --arrow-color: #466895; /* Cor das setas */
+            --arrow-hover-color: #3b5880; /* Cor das setas no hover */
         }
 
-        /* ============ RESET BÁSICO (RECOMENDADO) ============ */
+        /* ============ RESET ============ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* ============ ESTILOS GERAIS ============ */
+        /* ============ GERAL ============ */
         body {
             font-family: var(--body-font);
             background: var(--secondary-bg);
             color: var(--text-color);
             line-height: 1.6;
-            /* Adicionado para evitar overflow horizontal em dispositivos menores */
             overflow-x: hidden;
         }
 
         a {
             text-decoration: none;
-            cursor: pointer;
             color: var(--accent-color);
+            cursor: pointer;
         }
-        a:hover {
-            text-decoration: underline;
-        }
+        a:hover { text-decoration: underline; }
 
         .container {
-            width: 90%;  /* Ou use max-width: 90%;  para maior flexibilidade. */
+            width: 90%;
             max-width: 1200px;
             margin: 0 auto;
             padding: var(--spacing-unit);
         }
-
-        .text-center {
-            text-align: center;
-        }
-
-        /* Classes utilitárias - Boa prática! */
+        .text-center { text-align: center; }
         .mb-1 { margin-bottom: var(--spacing-unit); }
         .mb-2 { margin-bottom: calc(var(--spacing-unit) * 2); }
         .mt-1 { margin-top: var(--spacing-unit); }
         .mt-2 { margin-top: calc(var(--spacing-unit) * 2); }
 
-
         /* ============ CABEÇALHO ============ */
         header {
             background: url("15.png") no-repeat center center;
             background-size: cover;
-            position: relative;
             padding: calc(var(--spacing-unit) * 4) var(--spacing-unit);
             color: #fff;
         }
@@ -99,20 +86,20 @@
         }
         .header-overlay h1 {
             font-family: var(--heading-font);
-            font-size: 2.5rem; /* Use rem ou em para melhor escalabilidade */
+            font-size: 2.5rem;
             color: var(--heading-color);
             margin-bottom: var(--spacing-unit);
             line-height: 1.2;
         }
         .header-overlay p {
-            font-size: 1.2rem; /* Use rem ou em */
+            font-size: 1.2rem;
             max-width: 600px;
             margin: 0 auto var(--spacing-unit);
             color: #444;
         }
         .btn-group {
             display: flex;
-            flex-wrap: wrap; /* Importante para responsividade! */
+            flex-wrap: wrap;
             gap: var(--spacing-unit);
             justify-content: center;
             margin-top: var(--spacing-unit);
@@ -123,32 +110,29 @@
             display: inline-block;
             background: var(--button-bg);
             color: #fff;
-            padding: 0.8rem 1.5rem; /* rem ou em */
+            padding: 0.8rem 1.5rem;
             border-radius: var(--border-radius);
             font-weight: bold;
             transition: background 0.3s;
             border: none;
-            font-size: 1rem; /* rem ou em */
+            font-size: 1rem;
             text-transform: uppercase;
-            text-align: center;
-            cursor: pointer; /* Adicionado para melhor UX */
+            cursor: pointer;
         }
-        .btn:hover {
-            background: var(--button-bg-hover);
-        }
+        .btn:hover { background: var(--button-bg-hover); }
         .btn:focus {
             outline: 2px solid var(--accent-color);
             outline-offset: 2px;
         }
 
-        /* ============ SEÇÕES GERAIS ============ */
+        /* ============ SEÇÕES ============ */
         section {
             padding: calc(var(--spacing-unit) * 2) 0;
         }
         section h2 {
             font-family: var(--heading-font);
             text-align: center;
-            font-size: 2rem; /* rem ou em */
+            font-size: 2rem;
             color: var(--heading-color);
             margin-bottom: var(--spacing-unit);
             line-height: 1.2;
@@ -162,94 +146,128 @@
             padding: calc(var(--spacing-unit) * 2);
         }
         .sobre-mim-text {
-            font-size: 1.1rem;  /* rem ou em */
+            font-size: 1.1rem;
             max-width: 700px;
             margin: 0 auto var(--spacing-unit);
             text-align: center;
             color: #555;
         }
+
+        /* Grid com colunas de largura mínima */
         .notas-container {
-            display: flex;
-            flex-wrap: wrap; /* Importante! */
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Ajustado minmax */
             gap: var(--spacing-unit);
             margin-top: var(--spacing-unit);
+            justify-content: center; /* Centraliza os itens */
         }
         .nota {
             background: #f1f1f1;
             padding: 1rem;
             border-radius: var(--border-radius);
             text-align: center;
-            min-width: 150px; /* Evita que fiquem muito pequenos */
-            flex: 1 1 200px;  /* Permite crescer e encolher, mas com preferência por 200px */
+            /* Removido min-width e flex */
+            display: flex;          /* Flexbox para alinhar conteúdo */
+            flex-direction: column; /* Itens em coluna */
+            justify-content: space-between; /* Distribui o espaço */
         }
+
         .nota-numero {
-            font-size: 1.5rem; /* rem ou em */
+            font-size: 1.6rem; /* Aumentei um pouco */
             font-weight: bold;
             color: var(--heading-color);
             margin-bottom: 0.5rem;
         }
         .nota-descricao {
-            font-size: 1rem;  /* rem ou em */
+            font-size: 1rem;
             color: #555;
+            flex-grow: 1; /* Ocupa o espaço disponível */
         }
 
-        /* ============ SIMULADOS (SCROLL HORIZONTAL) ============ */
+
+        /* ============ SIMULADOS (SCROLL) ============ */
         .horizontal-scroll-container {
             margin-top: var(--spacing-unit);
-            overflow: hidden; /* Para esconder a barra de rolagem se não couber */
-            position: relative; /* Às vezes útil para posicionar elementos */
+            overflow: hidden;
+            position: relative; /* Para posicionar as setas */
         }
+
+        /* Setas de navegação */
+        .scroll-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem; /* Tamanho da seta */
+            color: var(--arrow-color);
+            background: rgba(255, 255, 255, 0.7); /* Fundo semi-transparente */
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+            z-index: 10; /* Acima do conteúdo */
+            transition: color 0.3s, background 0.3s; /* Transição suave */
+            border-radius: var(--border-radius); /* Arredondado */
+            opacity: 0; /* Começa invisível */
+        }
+
+         .scroll-arrow:hover {
+            color: var(--arrow-hover-color);
+            background: rgba(255,255,255, 0.9);
+        }
+
+        .scroll-arrow.left {
+            left: 0;
+        }
+
+        .scroll-arrow.right {
+            right: 0;
+        }
+        /* Mostra setas no hover do container */
+        .horizontal-scroll-container:hover .scroll-arrow{
+            opacity: 1;
+        }
+
         .horizontal-scroll-content {
             display: flex;
             gap: var(--spacing-unit);
-            overflow-x: auto; /* Habilita o scroll horizontal */
-            scroll-behavior: smooth; /* Animação suave ao rolar (opcional) */
+            overflow-x: auto;
+            scroll-behavior: smooth;
             padding: var(--spacing-unit) 0;
-             /* Esconde a barra de rolagem em navegadores WebKit (Chrome, Safari) */
-            -webkit-overflow-scrolling: touch; /* Melhora o scroll em dispositivos touch */
+            -webkit-overflow-scrolling: touch;
+            scroll-padding: 0 var(--spacing-unit); /* Espaço para as setas */
         }
-        .horizontal-scroll-content::-webkit-scrollbar {
-            display: none;  /* Esconde a barra de rolagem */
-        }
-        .horizontal-scroll-content {
-             /* Esconde a barra de rolagem no Firefox */
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+
+        .horizontal-scroll-content::-webkit-scrollbar { display: none; }
+        .horizontal-scroll-content { -ms-overflow-style: none; scrollbar-width: none; }
+
         .scroll-item {
-            flex: 0 0 auto;  /* Não cresce, não encolhe, mantém o tamanho definido */
-            width: 260px;  /* Largura do item */
+            flex: 0 0 auto;
+            width: 260px;
             background: #fff;
             border-radius: var(--border-radius);
             box-shadow: 0 2px 8px var(--shadow-color);
-            overflow: hidden; /* Para bordas arredondadas */
+            overflow: hidden;
             display: flex;
-            flex-direction: column; /* Organiza imagem e texto verticalmente */
+            flex-direction: column;
             transition: transform 0.3s;
         }
-
         .scroll-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 12px var(--shadow-color);
         }
-
         .scroll-item img {
             width: 80%;
-            height: auto; /* Mantém a proporção */
+            height: auto;
             max-height: 130px;
-            margin: 0 auto; /* Centraliza horizontalmente */
-            object-fit: contain;  /* Ajusta a imagem sem distorcer */
-            object-position: center; /* Centraliza a imagem dentro do espaço */
+            margin: 0 auto;
+            object-fit: contain;
         }
-
         .item-info {
             padding: var(--spacing-unit);
             font-size: 1rem;
             color: #444;
             display: flex;
-            flex-direction: column; /* Organiza o conteúdo verticalmente */
-            height: 100%; /* Ocupa todo o espaço disponível */
+            flex-direction: column;
+            height: 100%;
         }
         .item-info h3 {
             font-family: var(--heading-font);
@@ -258,7 +276,7 @@
             color: var(--heading-color);
         }
 
-        /* ============ PLANO DE ESTUDOS ============ */
+        /* ============ PLANO ============ */
         .plano-estudos {
             display: flex;
             flex-direction: column;
@@ -272,12 +290,11 @@
         }
         .plano-estudos img {
             width: 500px;
-            max-width: 90vw; /* Importante para responsividade! */
-            object-fit: cover; /* Mantém a proporção */
+            max-width: 90vw;
+            object-fit: cover;
             border-radius: var(--border-radius);
             box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
-
         .plano-estudos p {
             max-width: 600px;
             margin: 0 auto;
@@ -287,13 +304,12 @@
         }
 
         /* ============ BÔNUS ============ */
-       .bonus-list {
+        .bonus-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsivo! */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: calc(var(--spacing-unit) * 1.5);
             margin-top: calc(var(--spacing-unit) * 2);
         }
-
         .bonus-item {
             display: flex;
             flex-direction: column;
@@ -309,10 +325,9 @@
             height: 60px;
             margin-bottom: var(--spacing-unit);
             object-fit: contain;
-            object-position: center;
         }
         .bonus-info {
-            flex: 1; /* Ocupa o espaço restante */
+            flex: 1;
             font-size: 1rem;
             color: #444;
         }
@@ -324,10 +339,10 @@
             color: var(--heading-color);
         }
 
-        /* ============ PLANOS (TABELA DE PREÇOS) ============ */
+        /* ============ PLANOS ============ */
         .planos-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsivo! */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /*Aumentei o minmax*/
             gap: var(--spacing-unit);
             margin-top: calc(var(--spacing-unit) * 2);
         }
@@ -340,6 +355,10 @@
             flex-direction: column;
             align-items: center;
             transition: transform 0.3s;
+             /*Alinhamento dos cards de planos*/
+            justify-content: space-between;
+            text-align: center;  /*Centraliza o texto horizontalmente*/
+
         }
         .plano-card:hover {
             transform: translateY(-5px);
@@ -349,22 +368,22 @@
             font-family: var(--heading-font);
             font-size: 1.4rem;
             margin-bottom: 0.5rem;
-            text-align: center;
             line-height: 1.2;
             color: var(--heading-color);
+
         }
-        .plano-card p {
+         .plano-card p {
             font-size: 1rem;
             color: #555;
-            text-align: center;
             margin-bottom: var(--spacing-unit);
             line-height: 1.5;
+            flex-grow: 1; /* Ocupa espaço disponível, empurrando o preço */
         }
         .price {
             font-weight: bold;
             font-size: 1.4rem;
             color: #000;
-            margin-top: auto; /* Empurra o preço para baixo */
+            margin-top: auto;
             margin-bottom: 0.5rem;
         }
 
@@ -376,88 +395,36 @@
             margin: calc(var(--spacing-unit) * 2) 0;
         }
 
-        /* ============ MEDIA QUERIES (RESPONSIVIDADE) ============ */
-        /* Coloque as media queries no FINAL do seu CSS */
-        /* Boa prática: mobile-first (comece com os estilos para telas menores) */
-
-        /* Estilos para telas pequenas (ex: smartphones) */
+        /* ============ MEDIA QUERIES ============ */
         @media (max-width: 480px) {
-            .header-overlay h1 {
-                font-size: 1.8rem; /* Reduz o tamanho da fonte */
-            }
-            .header-overlay p {
-                font-size: 1rem;
-            }
-            .scroll-item {
-                width: 180px; /* Reduz a largura dos itens */
-            }
-            .plano-estudos img {
-                width: 100%; /* A imagem ocupa toda a largura */
-            }
-            .plano-card h4 {
-                font-size: 1.2rem;
-            }
-            .btn {
-                font-size: 0.9rem;
-                padding: 0.6rem 1rem;
-            }
-            .container{
-                width: 95%;
-            }
-             .notas-container {
-              gap: calc(var(--spacing-unit) / 2); /* Reduz o espaçamento entre as notas*/
-            }
-            .nota{
-               min-width: 120px;  /*Reduz um pouco mais o tamanho das notas*/
-            }
-
-            /* Ajuste no espaçamento, se necessário*/
-             .horizontal-scroll-content {
-                padding: calc(var(--spacing-unit) / 2) 0;
-            }
-            .bonus-list{
-                grid-template-columns: 1fr;  /*Uma coluna em dispositivos pequenos*/
-            }
-            .bonus-item{
-                padding: calc(var(--spacing-unit) / 2); /*Reduz um pouco o padding dos bonus */
-            }
+            .header-overlay h1 { font-size: 1.8rem; }
+            .header-overlay p { font-size: 1rem; }
+            .scroll-item { width: 180px; }
+            .plano-estudos img { width: 100%; }
+            .plano-card h4 { font-size: 1.2rem; }
+            .btn { font-size: 0.9rem; padding: 0.6rem 1rem; }
+            .container { width: 95%; }
+            .notas-container { gap: calc(var(--spacing-unit) / 2); }
+            .nota { min-width: 120px; }
+            .horizontal-scroll-content { padding: calc(var(--spacing-unit) / 2) 0; }
+             .bonus-list { grid-template-columns: 1fr; }
+            .bonus-item { padding: calc(var(--spacing-unit) / 2); }
         }
 
-
-        /* Estilos para tablets e telas um pouco maiores */
         @media (min-width: 481px) and (max-width: 768px) {
-            .header-overlay h1 {
-                font-size: 2.2rem; /* Tamanho intermediário */
+            .header-overlay h1 { font-size: 2.2rem; }
+            .scroll-item { width: 220px; }
+            section h2 { font-size: 1.8rem; }
+            .sobre-mim-text, .plano-estudos p { font-size: 1.05rem; }
+            .btn { font-size: 1rem; padding: 0.7rem 1.2rem; }
+            .notas-container{
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /*Para tablets*/
             }
-            .scroll-item {
-                width: 220px; /* Largura intermediária */
-            }
-            section h2 {
-                font-size: 1.8rem;
-            }
-            .sobre-mim-text,
-            .plano-estudos p {
-                font-size: 1.05rem;
-            }
-            /*Aumenta um pouco o tamanho em tablets, se necessário*/
-            .btn {
-              font-size: 1rem;
-              padding: 0.7rem 1.2rem;
-           }
         }
 
-
-        /* Estilos para telas maiores (desktops) -  Geralmente, você não precisa de uma media query para desktop
-           porque os estilos "padrão" (sem media query) já se aplicam a telas maiores.
-           Se você precisar de ajustes específicos para desktops MUITO grandes,
-           use min-width: 1200px (ou o valor que fizer sentido para seu layout). */
-        @media(min-width: 1024px){
-             .container{
-                width: 80%;  /*Ajusta a largura do container em telas maiores*/
-             }
+        @media (min-width: 1024px) {
+            .container { width: 80%; }
         }
-
-
     </style>
 </head>
 <body>
@@ -502,9 +469,11 @@
           <div class="nota-descricao">na redação ENEM (por 3 vezes)</div>
         </div>
         <div class="nota">
+            <div class="nota-numero"></div>
           <div class="nota-descricao">Vasta experiência em aulas particulares</div>
         </div>
         <div class="nota">
+            <div class="nota-numero"></div>
           <div class="nota-descricao">Programador em Machine Learning e AI</div>
         </div>
       </div>
@@ -512,10 +481,12 @@
   </section>
 
   <!-- SIMULADOS COM IA -->
-  <section id="simulados">
+ <section id="simulados">
     <div class="container">
       <h2>Simulados com IA</h2>
       <div class="horizontal-scroll-container">
+        <button class="scroll-arrow left" aria-label="Rolar para esquerda"><</button>
+        <button class="scroll-arrow right" aria-label="Rolar para direita">></button>
         <div class="horizontal-scroll-content">
           <div class="scroll-item">
             <img src="1.png" alt="Ícone de lupa sobre um relatório.">
@@ -636,6 +607,50 @@
       <p>© 2025 - Todos os direitos reservados.</p>
     </div>
   </footer>
+
+    <script>
+        // JavaScript para controlar o scroll horizontal com as setas
+        document.addEventListener('DOMContentLoaded', function() {
+            const containers = document.querySelectorAll('.horizontal-scroll-container');
+
+            containers.forEach(container => {
+                const content = container.querySelector('.horizontal-scroll-content');
+                const leftArrow = container.querySelector('.scroll-arrow.left');
+                const rightArrow = container.querySelector('.scroll-arrow.right');
+
+                if (!content || !leftArrow || !rightArrow) {
+                    console.warn("Elementos de scroll não encontrados em:", container);
+                    return; // Sai da função para este container
+                }
+
+                // Função para verificar se precisa mostrar/esconder as setas
+                const checkArrows = () => {
+                    leftArrow.style.display = content.scrollLeft > 0 ? 'block' : 'none';
+                    rightArrow.style.display = (content.scrollLeft + content.clientWidth) < content.scrollWidth ? 'block' : 'none';
+                };
+
+                // Event listeners para as setas
+                leftArrow.addEventListener('click', () => {
+                    content.scrollBy({ left: -280, behavior: 'smooth' }); // Ajuste conforme a largura dos seus itens
+                });
+
+                rightArrow.addEventListener('click', () => {
+                    content.scrollBy({ left: 280, behavior: 'smooth' }); // Ajuste conforme a largura
+                });
+
+                // Verifica as setas quando a página carrega e quando o scroll acontece.
+                checkArrows();
+                content.addEventListener('scroll', checkArrows);
+
+                //Verifica se há necessidade de mostrar a seta.  Se o conteúdo couber, esconde.
+                if (content.scrollWidth <= content.clientWidth){
+                     leftArrow.style.display = 'none';
+                     rightArrow.style.display = 'none';
+                }
+            });
+        });
+
+    </script>
 
 </body>
 </html>
