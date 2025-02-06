@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -78,7 +79,7 @@
       background: url("15.png") no-repeat center center;
       background-size: cover;
       position: relative;
-      padding: calc(var(--spacing-unit) * 4) var(--spacing-unit); /* Redução do tamanho do contêiner */
+      padding: calc(var(--spacing-unit) * 4) var(--spacing-unit);
       color: #fff;
     }
     .header-overlay {
@@ -160,7 +161,6 @@
       text-align: center;
       color: #555;
     }
-    /* Estilos antigos da lista foram substituídos */
     .notas-container {
       display: flex;
       flex-wrap: wrap;
@@ -361,6 +361,52 @@
       color: #666;
       margin: calc(var(--spacing-unit) * 2) 0;
     }
+
+    /* ============ MEDIA QUERIES PARA TORNAR O SITE RESPONSIVO ============ */
+    @media (max-width: 768px) {
+      .header-overlay h1 {
+        font-size: 2rem;
+      }
+      .header-overlay p {
+        font-size: 1rem;
+      }
+      .scroll-item {
+        width: 200px;
+      }
+      section h2 {
+        font-size: 1.5rem;
+      }
+      .sobre-mim-text,
+      .plano-estudos p {
+        font-size: 1rem;
+      }
+      .btn {
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-overlay h1 {
+        font-size: 1.6rem;
+      }
+      .header-overlay p {
+        font-size: 0.9rem;
+      }
+      .scroll-item {
+        width: 180px;
+      }
+      .plano-estudos img {
+        width: 100%;
+      }
+      .plano-card h4 {
+        font-size: 1.2rem;
+      }
+      .btn {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.8rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -542,3 +588,4 @@
 
 </body>
 </html>
+```
