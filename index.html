@@ -5,7 +5,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tutoria ENEM 750+</title>
-  <meta name="description" content="Tutoria personalizada para o ENEM com simulados, plano de estudos adaptável e suporte para alcançar 750+ pontos.">
+  <meta name="description" content="Tutoria personalizada para o ENEM, planos de estudos adaptáveis e suporte para alcançar resultados acima da média.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,19 +35,26 @@
       --border-radius: 15px;
       --shadow-color: rgba(0, 0, 0, 0.1);
       --spacing-unit: 1.3rem;
-      --arrow-color: var(--primary-blue);
-      --arrow-hover-color: var(--secondary-blue);
     }
 
-    *,
-    *::before,
-    *::after {
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --white-background: #121212;
+        --light-background: #1e1e1e;
+        --heading-color: #e3f2fd;
+        --text-color: #d1d1d1;
+        --dark-gray-text: #e0e0e0;
+        --highlight-color: #333333;
+        --shadow-color: rgba(255, 255, 255, 0.05);
+      }
+    }
+
+    * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    /* Suavizando o scroll */
     html {
       scroll-behavior: smooth;
     }
@@ -91,13 +98,22 @@
       padding: var(--spacing-unit);
     }
 
-    .text-center { text-align: center; }
-    .mb-1 { margin-bottom: var(--spacing-unit); }
-    .mb-2 { margin-bottom: calc(var(--spacing-unit) * 2); }
-    .mt-1 { margin-top: var(--spacing-unit); }
-    .mt-2 { margin-top: calc(var(--spacing-unit) * 2); }
+    .text-center {
+      text-align: center;
+    }
+    .mb-1 {
+      margin-bottom: var(--spacing-unit);
+    }
+    .mb-2 {
+      margin-bottom: calc(var(--spacing-unit) * 2);
+    }
+    .mt-1 {
+      margin-top: var(--spacing-unit);
+    }
+    .mt-2 {
+      margin-top: calc(var(--spacing-unit) * 2);
+    }
 
-    /* ====== HEADINGS (usando clamp para melhor responsividade) ====== */
     h1 {
       font-family: var(--heading-font);
       font-size: clamp(1.4rem, 5vw, 2rem);
@@ -113,7 +129,6 @@
       margin-bottom: calc(var(--spacing-unit) * 1);
     }
 
-    /* ====== ANIMAÇÃO DE FUNDO NO HEADER ====== */
     @keyframes gradientAnimation {
       0% {
         background-position: 0% 50%;
@@ -126,7 +141,6 @@
       }
     }
 
-    /* ====== ANIMAÇÕES / INTERAÇÕES ====== */
     .reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -141,17 +155,18 @@
       transition: transform 0.4s;
     }
 
-    /* ====== HEADER ====== */
     header {
-      /* Animação suave no background */
       background: linear-gradient(270deg, var(--light-blue), #fff, var(--light-blue));
       background-size: 600% 600%;
       animation: gradientAnimation 15s ease infinite;
       padding: 1rem 0;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
       box-shadow: 0 2px 5px var(--shadow-color);
+    }
+    header .container {
+      position: relative;
     }
 
     .header-container {
@@ -208,12 +223,11 @@
       font-size: 0.95rem;
     }
     .btn-header-nav:hover {
-      background-color: var(--highlight-color);
+      background-color: var(--light-blue);
       color: var(--dark-gray-text);
       border-color: var(--accent-color);
     }
 
-    /* Menu responsivo */
     @media (max-width: 768px) {
       .menu-toggle {
         display: block;
@@ -229,6 +243,7 @@
         box-shadow: 0 2px 5px rgba(0,0,0,0.15);
         border-radius: var(--border-radius);
         display: none;
+        z-index: 9999;
       }
       .header-nav.open {
         display: flex;
@@ -239,7 +254,6 @@
       }
     }
 
-    /* ====== BOTÕES GERAIS ====== */
     .btn {
       display: inline-block;
       background-color: var(--button-bg);
@@ -263,7 +277,6 @@
       outline-offset: 2px;
     }
 
-    /* ====== BOTÃO VOLTAR AO TOPO ====== */
     #back-to-top {
       position: fixed;
       bottom: 30px;
@@ -289,12 +302,10 @@
       font-size: 1.2rem;
     }
 
-    /* ====== SEÇÕES ====== */
     section {
       padding: calc(var(--spacing-unit) * 2.5) 0;
     }
 
-    /* ====== SOBRE MIM ====== */
     .sobre-mim {
       background-color: var(--white-background);
       border-radius: var(--border-radius);
@@ -306,8 +317,8 @@
       gap: 2rem;
     }
     .sobre-mim-foto {
-      width: 150px;
-      height: 150px;
+      width: clamp(120px, 30%, 200px);
+      height: auto;
       border-radius: 50%;
       object-fit: cover;
       box-shadow: 0 2px 5px var(--shadow-color);
@@ -336,7 +347,7 @@
       margin-top: var(--spacing-unit);
     }
     .nota {
-      background-color: var(--highlight-color);
+      background-color: var(--light-blue);
       padding: 1.3rem;
       border-radius: var(--border-radius);
       text-align: center;
@@ -363,7 +374,6 @@
       flex-grow: 1;
     }
 
-    /* ====== TUTORIA GPS ====== */
     #tutoria-gps {
       background-color: var(--white-background);
       border-radius: var(--border-radius);
@@ -372,7 +382,6 @@
       text-align: center;
       padding: calc(var(--spacing-unit) * 2);
     }
-    /* Ajustado para Facebook cover (820x312) mantendo boa responsividade */
     #tutoria-gps .gps-image {
       display: block;
       margin: 1rem auto 0 auto;
@@ -387,7 +396,6 @@
       transform: scale(1.03);
     }
 
-    /* ====== DIFERENCIAL ====== */
     #diferencial {
       background-color: var(--light-background);
     }
@@ -412,8 +420,7 @@
       flex-wrap: wrap;
     }
     .comparacao-imagens img {
-      width: 320px;
-      max-width: 95%;
+      width: clamp(250px, 40%, 500px);
       height: auto;
       border-radius: var(--border-radius);
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -446,74 +453,26 @@
       margin-right: 0.4rem;
     }
 
-    /* ====== PLANO DE ESTUDOS (OCULTO) ====== */
     #plano-estudos {
       display: none;
     }
 
-    /* ====== BÔNUS ====== */
-    .bonus-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: calc(var(--spacing-unit) * 1.5);
-      margin-top: calc(var(--spacing-unit) * 2);
-    }
-    .bonus-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      background-color: var(--white-background);
-      border-radius: var(--border-radius);
-      box-shadow: 0 4px 10px var(--shadow-color);
-      padding: calc(var(--spacing-unit) * 1.2);
-      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    }
-    .bonus-item:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-    }
-    .bonus-item img {
-      width: 80px;
-      height: 80px;
-      margin-bottom: calc(var(--spacing-unit) / 1.5);
-      object-fit: contain;
-      border: 2px solid var(--highlight-color);
-      border-radius: 50%;
-      padding: 0.5rem;
-    }
-    .bonus-info {
-      flex: 1;
-      font-size: 1rem;
-      color: var(--dark-gray-text);
-    }
-    .bonus-info strong {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-family: var(--heading-font);
-      font-size: 1.2rem;
-      color: var(--heading-color);
-    }
-
-    /* ====== PLANOS (OCULTOS) ====== */
     #planos {
       background-color: var(--light-background);
     }
     .planos-container {
-      display: none;
+      display: block;
     }
 
-    /* ====== RODAPÉ ====== */
     footer {
       text-align: center;
       font-size: 0.9rem;
       color: var(--gray-text);
       margin: calc(var(--spacing-unit) * 2.5) 0;
       padding-top: calc(var(--spacing-unit) * 1.5);
-      border-top: 1px solid var(--highlight-color);
+      border-top: 1px solid var(--light-blue);
     }
 
-    /* ====== MEDIA QUERIES ====== */
     @media (max-width: 480px) {
       .header-container {
         flex-wrap: wrap;
@@ -534,11 +493,6 @@
         text-align: center;
         padding: calc(var(--spacing-unit) * 1.5);
       }
-      .sobre-mim-foto {
-        width: 120px;
-        height: 120px;
-        margin-bottom: var(--spacing-unit);
-      }
       .sobre-mim-text,
       .diferencial-text {
         font-size: 1rem;
@@ -553,10 +507,6 @@
       .comparacao-imagens img {
         width: 95%;
         max-width: 280px;
-      }
-      .bonus-item img {
-        width: 60px;
-        height: 60px;
       }
       #tutoria-gps .gps-image {
         max-width: 95%;
@@ -582,7 +532,6 @@
 </head>
 <body>
 
-  <!-- CABEÇALHO -->
   <header>
     <div class="container header-container">
       <div class="header-logo">
@@ -592,7 +541,11 @@
         <a href="mailto:estudacom.rodrigo@gmail.com">
           <i class="fa fa-envelope"></i> <span>estudacom.rodrigo@gmail.com</span>
         </a>
-        <a href="https://wa.me/5531986569061">
+        <a
+          href="https://wa.me/5531986569061?text=Ol%C3%A1%2C%20vim%20pelo%20Instagram%20e%20estou%20interessado%20na%20primeira%20Mentoria%20por%20R%24%2025%2C00"
+          target="_blank"
+          rel="noopener"
+        >
           <i class="fa fa-whatsapp"></i> <span>WhatsApp</span>
         </a>
         <a
@@ -612,13 +565,11 @@
       <nav class="header-nav" id="navbar">
         <button class="btn-header-nav" onclick="location.href='#sobre-mim'">Sobre Mim</button>
         <button class="btn-header-nav" onclick="location.href='#diferencial'">Diferencial</button>
-        <button class="btn-header-nav" onclick="location.href='#bonus'">Bônus</button>
         <button class="btn-header-nav" onclick="location.href='#planos'">Planos</button>
       </nav>
     </div>
   </header>
 
-  <!-- SOBRE MIM -->
   <section id="sobre-mim" class="sobre-mim reveal">
     <div class="container">
       <img src="18.png" alt="Foto do Rodrigo" class="sobre-mim-foto">
@@ -653,15 +604,19 @@
     </div>
   </section>
 
-  <!-- TUTORIA GPS -->
   <section id="tutoria-gps" class="reveal">
     <div class="container">
       <h2>Tutoria GPS: para quem busca encontrar o caminho certo</h2>
       <img src="22.png" alt="Tutoria GPS" class="gps-image hover-scale">
+      <p class="sobre-mim-text mt-1">
+        A tutoria é um plano pedagógico com aulas particulares que busca encontrar seus pontos de dificuldade analisando
+        sua rotina, acertos e erros em questões e fornecendo reforço particular em redação, matemática, literatura (Fuvest)
+        e física. Vou atuar como um professor que investigará e ajudará em seus pontos de melhoria nos estudos e conhecimentos.
+        Obtenha clareza e direcionamento já na primeira aula.
+      </p>
     </div>
   </section>
 
-  <!-- PARA QUEM É A TUTORIA -->
   <section class="sobre-mim reveal">
     <div class="container">
       <h2>Para quem é a tutoria?</h2>
@@ -673,7 +628,6 @@
     </div>
   </section>
 
-  <!-- DIFERENCIAL -->
   <section id="diferencial" class="reveal">
     <div class="container diferencial-container">
       <h2>O diferencial é a individualidade</h2>
@@ -687,75 +641,35 @@
         <img src="17.png" alt="Tutoria individualizada" class="reveal hover-scale">
       </div>
       <ul class="beneficios-lista reveal">
-        <li>Simulados feitos para você.</li>
+        <li>Listas personalizadas por erros e acertos feitas para você.</li>
         <li>Questões adaptadas para evitar acertos por mera repetição.</li>
         <li>Plano de estudos <span class="keyword">personalizado</span>.</li>
         <li>Apoio emocional até o dia da prova.</li>
         <li>Foco em rotina e constância nos estudos.</li>
-        <li>Simulados curtos e direcionados.</li>
+        <li>Listas curtas e direcionadas.</li>
         <li>Organização para suas revisões.</li>
         <li>Estratégias de estudo para potencializar resultados.</li>
       </ul>
     </div>
   </section>
 
-  <!-- PLANO DE ESTUDOS COM IA (OCULTO) -->
-  <section id="plano-estudos" class="plano-estudos container">
+  <section id="plano-estudos" class="plano-estudos container" style="display: none;">
     <!-- Mantido oculto -->
   </section>
 
-  <!-- BÔNUS -->
-  <section id="bonus" class="reveal">
-    <div class="container">
-      <h2><span class="keyword">Bônus</span>*</h2>
-      <div class="bonus-list">
-        <div class="bonus-item reveal">
-          <img src="9.png" alt="Ícone representando a tutoria sem fidelidade.">
-          <div class="bonus-info">
-            <strong>Tutoria <span class="keyword">sem fidelidade</span></strong>
-            Continue apenas se fizer sentido para você. Mais liberdade para focar no que realmente importa.
-          </div>
-        </div>
-        <div class="bonus-item reveal">
-          <img src="8.png" alt="Ícone representando um mini curso de interpretação matemática.">
-          <div class="bonus-info">
-            <strong>Mini curso de <span class="keyword">interpretação matemática</span>*</strong>
-            Aprenda a decifrar enunciados e ganhar tempo nas questões mais complexas de exatas.
-          </div>
-        </div>
-        <div class="bonus-item reveal">
-          <img src="13.png" alt="Ícone de IA, representando mini curso sobre uso de IA para estudar.">
-          <div class="bonus-info">
-            <strong>Mini curso: Usando <span class="keyword">IA</span> para estudar*</strong>
-            Estratégias práticas para utilizar ferramentas de IA a favor do seu aprendizado.
-          </div>
-        </div>
-        <div class="bonus-item reveal">
-          <img src="12.png" alt="Ícone representando aulas particulares.">
-          <div class="bonus-info">
-            <strong>Acesso a <span class="keyword">aulas particulares</span>*</strong>
-            Redação, Literatura (Fuvest), Física e Matemática básica. Suporte dedicado no que você mais precisar.
-          </div>
-        </div>
-      </div>
-      <p class="text-center" style="font-size:0.9rem; margin-top:1.5rem; color: #777;">
-        *Exclusivo para alunos do acompanhamento
-      </p>
-    </div>
-  </section>
-
-  <!-- PLANOS DA TUTORIA (OCULTO) -->
-  <section id="planos">
+  <section id="planos" class="planos-container">
     <div class="container reveal">
-      <h2>Tutoria a partir de R$35,00/mês</h2>
+      <h2>Tutoria a partir de R$35,00/hora</h2>
       <p class="text-center mb-1" style="font-size:1rem; color: #777;">
         <em>Planos individuais pensados em você</em>
       </p>
       <div class="text-center mt-2">
         <a
-          href="https://wa.me/5531986569061?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20suas%20aulas%21"
+          href="https://wa.me/5531986569061?text=Ol%C3%A1%2C%20vim%20pelo%20Instagram%20e%20estou%20interessado%20na%20primeira%20Mentoria%20por%20R%24%2025%2C00"
           class="btn"
           style="font-size:1.2rem;"
+          target="_blank"
+          rel="noopener"
         >
           Garanta a primeira aula com 28% OFF
         </a>
@@ -763,14 +677,12 @@
     </div>
   </section>
 
-  <!-- RODAPÉ -->
   <footer>
     <div class="container">
       <p>© 2025 - Todos os direitos reservados.</p>
     </div>
   </footer>
 
-  <!-- BOTÃO VOLTAR AO TOPO -->
   <button id="back-to-top"><i class="fa fa-chevron-up"></i></button>
 
   <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
@@ -780,7 +692,6 @@
       nav.classList.toggle('open');
     }
 
-    // Exibir/ocultar botão "Voltar ao topo"
     window.addEventListener('scroll', () => {
       const btnTop = document.getElementById('back-to-top');
       if (window.scrollY > 300) {
@@ -790,16 +701,12 @@
       }
     });
 
-    // Rolar até o topo ao clicar no botão
     document.getElementById('back-to-top').addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Intersection Observer para animações "reveal" ao rolar a página
     const revealElements = document.querySelectorAll('.reveal');
-    const observerConfig = {
-      threshold: 0.1
-    };
+    const observerConfig = { threshold: 0.1 };
 
     const revealOnScroll = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
