@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -17,25 +18,39 @@
     :root {
       --heading-font: 'Architects Daughter', cursive;
       --body-font: 'Open Sans', sans-serif;
+
+      /* Cores principais */
       --primary-blue: #1e88e5;
       --secondary-blue: #0d47a1;
       --light-blue: #e3f2fd;
       --gray-text: #555;
       --dark-gray-text: #333;
+
+      /* Cores de fundo e texto (modo claro) */
       --white-background: #fff;
       --light-background: #f5f5f5;
       --heading-color: var(--secondary-blue);
       --text-color: var(--gray-text);
+
+      /* Acentos e destaques */
       --accent-color: var(--primary-blue);
       --button-bg: var(--primary-blue);
       --button-bg-hover: var(--secondary-blue);
       --secondary-bg: var(--light-background);
       --highlight-color: var(--light-blue);
-      --border-radius: 15px;
+
+      /* Gradiente do header para modo claro */
+      --header-gradient: linear-gradient(270deg, var(--light-blue), var(--white-background), var(--light-blue));
+
+      /* Sombras e espaçamento */
       --shadow-color: rgba(0, 0, 0, 0.1);
       --spacing-unit: 1.3rem;
+      
+      /* Texto dentro de botões e ícones */
+      --button-text-color: #fff;
     }
 
+    /* Ajustes para modo escuro */
     @media (prefers-color-scheme: dark) {
       :root {
         --white-background: #121212;
@@ -43,8 +58,11 @@
         --heading-color: #e3f2fd;
         --text-color: #d1d1d1;
         --dark-gray-text: #e0e0e0;
-        --highlight-color: #333333;
+        --highlight-color: #444;
         --shadow-color: rgba(255, 255, 255, 0.05);
+
+        /* Gradiente do header para modo escuro */
+        --header-gradient: linear-gradient(270deg, #333333, #121212, #333333);
       }
     }
 
@@ -155,7 +173,7 @@
     }
 
     header {
-      background: linear-gradient(270deg, var(--light-blue), #fff, var(--light-blue));
+      background: var(--header-gradient);
       background-size: 600% 600%;
       animation: gradientAnimation 15s ease infinite;
       padding: 1rem 0;
@@ -256,7 +274,7 @@
     .btn {
       display: inline-block;
       background-color: var(--button-bg);
-      color: var(--white-background);
+      color: var(--button-text-color);
       padding: 1rem 2rem;
       border-radius: var(--border-radius);
       font-weight: 600;
@@ -283,7 +301,7 @@
       width: 45px;
       height: 45px;
       background-color: var(--accent-color);
-      color: #fff;
+      color: var(--button-text-color);
       border: none;
       border-radius: 50%;
       cursor: pointer;
@@ -452,6 +470,7 @@
       margin-right: 0.4rem;
     }
 
+    /* Seção oculta, caso queira ativar no futuro */
     #plano-estudos {
       display: none;
     }
@@ -652,9 +671,8 @@
     </div>
   </section>
 
-  <section id="plano-estudos" class="plano-estudos container" style="display: none;">
-    <!-- Mantido oculto -->
-  </section>
+  <!-- Seção oculta (caso deseje exibir no futuro, remova a propriedade display: none) -->
+  <section id="plano-estudos" class="plano-estudos container" style="display: none;"></section>
 
   <section id="planos" class="planos-container">
     <div class="container reveal">
