@@ -1,632 +1,740 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Mentoria ENEM 750+</title>
-    <meta name="description" content="Mentoria personalizada para o ENEM com simulados de IA, plano de estudos adaptável e suporte para alcançar 750+ pontos.">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tutoria ENEM 750+</title>
+  <meta name="description" content="Tutoria personalizada para o ENEM com simulados de IA, plano de estudos adaptável e suporte para alcançar 750+ pontos.">
 
-    <style>
-        /* ============ FONTS ============ */
-        @font-face {
-            font-family: "BradleyHandITC";
-            src: url("path/to/BradleyHandITC.woff2") format("woff2");
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet"
+  >
 
-        /* ============ VARIÁVEIS CSS ============ */
-        :root {
-            --heading-font: "BradleyHandITC", cursive;
-            --body-font: 'Open Sans', sans-serif; /* Fonte mais moderna */
-            --heading-color: #002855;
-            --text-color: #444; /* Tom de cinza mais escuro */
-            --accent-color: #007bff; /* Azul para palavras-chave */
-            --button-bg: #007bff; /* Azul para botões */
-            --button-bg-hover: #0056b3; /* Azul mais escuro no hover */
-            --secondary-bg: #f8f9fa; /* Cinza claro para fundo */
-            --border-radius: 12px; /* Bordas mais arredondadas */
-            --shadow-color: rgba(0, 0, 0, 0.15); /* Sombra mais suave */
-            --spacing-unit: 1.25rem; /* Espaçamento maior */
-            --arrow-color: #007bff;
-            --arrow-hover-color: #0056b3;
-            --highlight-color: #e9ecef; /* Cinza claro para destaque */
-        }
+  <style>
+    :root {
+      --heading-font: 'Architects Daughter', cursive;
+      --body-font: 'Open Sans', sans-serif;
+      --primary-blue: #1e88e5;
+      --secondary-blue: #0d47a1;
+      --light-blue: #e3f2fd;
+      --gray-text: #555;
+      --dark-gray-text: #333;
+      --white-background: #fff;
+      --light-background: #f5f5f5;
+      --heading-color: var(--secondary-blue);
+      --text-color: var(--gray-text);
+      --accent-color: var(--primary-blue);
+      --button-bg: var(--primary-blue);
+      --button-bg-hover: var(--secondary-blue);
+      --secondary-bg: var(--light-background);
+      --highlight-color: var(--light-blue);
+      --border-radius: 15px;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --spacing-unit: 1.3rem;
+      --arrow-color: var(--primary-blue);
+      --arrow-hover-color: var(--secondary-blue);
+    }
 
-        /* ============ RESET ============ */
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* ============ GERAL ============ */
-        body {
-            font-family: var(--body-font);
-            background: var(--secondary-bg);
-            color: var(--text-color);
-            line-height: 1.7; /* Aumentei o espaçamento entre linhas */
-            overflow-x: hidden;
-            font-size: 16px; /* Tamanho base da fonte */
-        }
+    /* Suavizando o scroll */
+    html {
+      scroll-behavior: smooth;
+    }
 
-        a {
-            text-decoration: none;
-            color: var(--accent-color);
-            cursor: pointer;
-            transition: color 0.2s ease-in-out; /* Transição suave na cor */
-        }
-        a:hover {
-            color: var(--button-bg-hover); /* Cor do link no hover */
-            text-decoration: underline;
-        }
+    body {
+      font-family: var(--body-font);
+      background-color: var(--secondary-bg);
+      color: var(--text-color);
+      line-height: 1.7;
+      overflow-x: hidden;
+      font-size: 16px;
+    }
 
-        .container {
-            width: 90%;
-            max-width: 1100px; /* Reduzi um pouco */
-            margin: 0 auto;
-            padding: var(--spacing-unit);
-        }
-        .text-center { text-align: center; }
-        .mb-1 { margin-bottom: var(--spacing-unit); }
-        .mb-2 { margin-bottom: calc(var(--spacing-unit) * 2); }
-        .mt-1 { margin-top: var(--spacing-unit); }
-        .mt-2 { margin-top: calc(var(--spacing-unit) * 2); }
+    a {
+      text-decoration: none;
+      color: var(--accent-color);
+      cursor: pointer;
+      transition: color 0.3s ease-in-out;
+    }
+    a:hover {
+      color: var(--button-bg-hover);
+      text-decoration: underline;
+    }
 
-        /* Estilo para palavras-chave */
-        .keyword {
-            color: var(--accent-color);
-            font-weight: 600; /* Semi-bold */
-        }
+    .keyword {
+      color: var(--accent-color);
+      font-weight: 600;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .keyword:hover {
+      background-color: var(--light-blue);
+      color: var(--dark-gray-text);
+      border-radius: 4px;
+      padding: 2px 4px;
+    }
 
-        /* ============ CABEÇALHO ============ */
-        header {
-            background: url("15.png") no-repeat center center;
-            background-size: cover;
-            padding: calc(var(--spacing-unit) * 4) var(--spacing-unit);
-            color: #fff;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Sombra no texto */
-        }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--spacing-unit);
+    }
 
-        .header-overlay {
-            background: rgba(255, 255, 255, 0.85); /* Aumentei a opacidade */
-            border-radius: var(--border-radius);
-            max-width: 800px;
-            margin: 0 auto;
-            padding: calc(var(--spacing-unit) * 3); /* Aumentei o padding */
-            text-align: center;
-            color: var(--text-color);
-            box-shadow: 0 4px 12px var(--shadow-color); /* Sombra mais proeminente */
-        }
-        .header-overlay h1 {
-            font-family: var(--heading-font);
-            font-size: 3rem; /* Aumentei o título */
-            color: var(--heading-color);
-            margin-bottom: calc(var(--spacing-unit) / 2); /* Reduzi a margem */
-            line-height: 1.3; /* Ajustei a altura da linha */
-            letter-spacing: 0.5px; /* Espaçamento entre letras */
-        }
-        .header-overlay p {
-            font-size: 1.3rem; /* Aumentei o parágrafo */
-            max-width: 650px; /* Aumentei um pouco */
-            margin: 0 auto var(--spacing-unit);
-            color: var(--text-color);
-        }
-        .btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: calc(var(--spacing-unit) / 2); /* Reduzi o gap */
-            justify-content: center;
-            margin-top: var(--spacing-unit);
-        }
+    .text-center { text-align: center; }
+    .mb-1 { margin-bottom: var(--spacing-unit); }
+    .mb-2 { margin-bottom: calc(var(--spacing-unit) * 2); }
+    .mt-1 { margin-top: var(--spacing-unit); }
+    .mt-2 { margin-top: calc(var(--spacing-unit) * 2); }
 
-        /* ============ BOTÕES ============ */
-        .btn {
-            display: inline-block;
-            background: var(--button-bg);
-            color: #fff;
-            padding: 1rem 2rem; /* Aumentei o padding */
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            transition: background 0.3s;
-            border: none;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            cursor: pointer;
-            letter-spacing: 1px; /* Espaçamento */
-        }
-        .btn:hover {
-            background: var(--button-bg-hover);
-        }
-        .btn:focus {
-            outline: 2px solid var(--accent-color);
-            outline-offset: 2px;
-        }
+    /* ====== HEADINGS (usando clamp para melhor responsividade) ====== */
+    h1 {
+      font-family: var(--heading-font);
+      font-size: clamp(1.4rem, 5vw, 2rem);
+      color: var(--heading-color);
+      margin-right: 1rem;
+    }
+    h2 {
+      font-family: var(--heading-font);
+      font-size: clamp(1.6rem, 5vw, 2.5rem);
+      color: var(--heading-color);
+      text-align: center;
+      line-height: 1.3;
+      margin-bottom: calc(var(--spacing-unit) * 1);
+    }
 
-        /* ============ SEÇÕES ============ */
-        section {
-            padding: calc(var(--spacing-unit) * 3) 0; /* Aumentei o padding */
-        }
-        section h2 {
-            font-family: var(--heading-font);
-            text-align: center;
-            font-size: 2.5rem; /* Aumentei */
-            color: var(--heading-color);
-            margin-bottom: calc(var(--spacing-unit) / 1.5);
-            line-height: 1.3;
-        }
+    /* ====== ANIMAÇÃO DE FUNDO NO HEADER ====== */
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
 
-        /* ============ SOBRE MIM ============ */
-        .sobre-mim {
-           background: #fff;
-            border-radius: var(--border-radius);
-            box-shadow: 0 2px 8px var(--shadow-color);
-            padding: calc(var(--spacing-unit) * 2);
+    /* ====== ANIMAÇÕES / INTERAÇÕES ====== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: none;
+    }
+    .hover-scale:hover {
+      transform: scale(1.05);
+      transition: transform 0.4s;
+    }
 
-        }
-        .sobre-mim-text {
-            font-size: 1.2rem; /*Aumentei*/
-            max-width: 750px; /*Aumentei*/
-            margin: 0 auto var(--spacing-unit);
-            text-align: center;
-            color: #555;
+    /* ====== HEADER ====== */
+    header {
+      /* Animação suave no background */
+      background: linear-gradient(270deg, var(--light-blue), #fff, var(--light-blue));
+      background-size: 600% 600%;
+      animation: gradientAnimation 15s ease infinite;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px var(--shadow-color);
+    }
 
-        }
-        .notas-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); /*Aumentei o min*/
-            gap: var(--spacing-unit);
-            margin-top: var(--spacing-unit);
-            justify-content: center;
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--highlight-color);
+    }
 
-        }
-        .nota {
-             background: var(--highlight-color); /* Fundo cinza claro */
-            padding: 1.25rem; /* Aumentei */
-            border-radius: var(--border-radius);
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Transição */
-        }
+    .header-contact {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+    }
+    .header-contact a {
+      color: var(--text-color);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.3s ease-in-out;
+      font-size: 0.95rem;
+    }
+    .header-contact i {
+      font-size: 1.2rem;
+    }
 
-        .nota:hover {
-             transform: translateY(-5px); /* Leve elevação */
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-        }
-        .nota-numero {
-           font-size: 1.8rem;  /*Aumentei um pouco*/
-            font-weight: bold;
-            color: var(--heading-color);
-            margin-bottom: 0.5rem;
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+    }
+    .menu-toggle {
+      display: none;
+      background-color: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-color);
+    }
+    .header-nav {
+      display: flex;
+      gap: 1rem;
+    }
+    .btn-header-nav {
+      background-color: transparent;
+      color: var(--text-color);
+      border: 1px solid var(--highlight-color);
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+      font-size: 0.95rem;
+    }
+    .btn-header-nav:hover {
+      background-color: var(--highlight-color);
+      color: var(--dark-gray-text);
+      border-color: var(--accent-color);
+    }
 
-        }
-        .nota-descricao {
-            font-size: 1.1rem; /* Aumentei */
-            color: var(--text-color);
-            flex-grow: 1;
-        }
+    /* Menu responsivo */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      .header-nav {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: var(--white-background);
+        flex-direction: column;
+        width: 180px;
+        padding: 1rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        border-radius: var(--border-radius);
+        display: none;
+      }
+      .header-nav.open {
+        display: flex;
+      }
+      .btn-header-nav {
+        width: 100%;
+        margin: 0.3rem 0;
+      }
+    }
 
-        /* ============ SIMULADOS ============ */
-        .horizontal-scroll-container {
-            margin-top: var(--spacing-unit);
-            overflow: hidden;
-            position: relative;
+    /* ====== BOTÕES GERAIS ====== */
+    .btn {
+      display: inline-block;
+      background-color: var(--button-bg);
+      color: var(--white-background);
+      padding: 1rem 2rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      transition: background-color 0.3s;
+      border: none;
+      font-size: 1rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      letter-spacing: 0.8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+    .btn:hover {
+      background-color: var(--button-bg-hover);
+    }
+    .btn:focus {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 2px;
+    }
 
-        }
-        .scroll-arrow {
-             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2.5rem; /* Aumentei */
-            color: var(--arrow-color);
-            background: rgba(255, 255, 255, 0.7);
-            border: none;
-            padding: 0.5rem;
-            cursor: pointer;
-            z-index: 10;
-            transition: color 0.3s, background 0.3s;
-            border-radius: var(--border-radius);
-            opacity: 0;
+    /* ====== BOTÃO VOLTAR AO TOPO ====== */
+    #back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 45px;
+      height: 45px;
+      background-color: var(--accent-color);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
+      z-index: 999;
+    }
+    #back-to-top:hover {
+      background-color: var(--button-bg-hover);
+    }
+    #back-to-top i {
+      font-size: 1.2rem;
+    }
 
-        }
-        .scroll-arrow:hover {
-            color: var(--arrow-hover-color);
-             background: rgba(255,255,255, 0.9);
-        }
+    /* ====== SEÇÕES ====== */
+    section {
+      padding: calc(var(--spacing-unit) * 2.5) 0;
+    }
 
-        .scroll-arrow.left { left: 0; }
-        .scroll-arrow.right { right: 0; }
-        .horizontal-scroll-container:hover .scroll-arrow { opacity: 1; }
+    /* ====== SOBRE MIM ====== */
+    .sobre-mim {
+      background-color: var(--white-background);
+      border-radius: var(--border-radius);
+      box-shadow: 0 3px 9px var(--shadow-color);
+      padding: calc(var(--spacing-unit) * 2);
+      margin-bottom: var(--spacing-unit);
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .sobre-mim-foto {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 5px var(--shadow-color);
+      transition: transform 0.4s;
+    }
+    .sobre-mim-foto:hover {
+      transform: scale(1.03);
+    }
+    .sobre-mim-content {
+      flex: 1;
+    }
+    .sobre-mim-text {
+      font-size: 1.15rem;
+      max-width: 800px;
+      text-align: left;
+      color: var(--dark-gray-text);
+      line-height: 1.8;
+      margin: 0;
+    }
 
-        .horizontal-scroll-content {
-           display: flex;
-            gap: calc(var(--spacing-unit) * 1.5); /* Aumentei o gap */
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding: var(--spacing-unit) 0;
-            -webkit-overflow-scrolling: touch;
-            scroll-padding: 0 var(--spacing-unit);
+    .notas-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: var(--spacing-unit);
+      margin-top: var(--spacing-unit);
+    }
+    .nota {
+      background-color: var(--highlight-color);
+      padding: 1.3rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      min-width: 160px;
+      flex-grow: 1;
+    }
+    .nota:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 12px rgba(0,0,0,0.12);
+    }
+    .nota-numero {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--heading-color);
+      margin-bottom: 0.5rem;
+    }
+    .nota-descricao {
+      font-size: 1.1rem;
+      color: var(--text-color);
+      flex-grow: 1;
+    }
 
-        }
-        .horizontal-scroll-content::-webkit-scrollbar { display: none; }
-        .horizontal-scroll-content { -ms-overflow-style: none; scrollbar-width: none; }
+    /* ====== TUTORIA GPS ====== */
+    #tutoria-gps {
+      background-color: var(--white-background);
+      border-radius: var(--border-radius);
+      box-shadow: 0 3px 9px var(--shadow-color);
+      margin-bottom: var(--spacing-unit);
+      text-align: center;
+      padding: calc(var(--spacing-unit) * 2);
+    }
+    /* Ajustado para Facebook cover (820x312) mantendo boa responsividade */
+    #tutoria-gps .gps-image {
+      display: block;
+      margin: 1rem auto 0 auto;
+      width: 100%;
+      max-width: 820px;
+      height: auto;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: transform 0.4s;
+    }
+    #tutoria-gps .gps-image:hover {
+      transform: scale(1.03);
+    }
 
-        .scroll-item {
-            flex: 0 0 auto;
-            width: 280px;  /*Aumentei um pouco*/
-            background: #fff;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 10px var(--shadow-color); /* Sombra */
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transição */
+    /* ====== DIFERENCIAL ====== */
+    #diferencial {
+      background-color: var(--light-background);
+    }
+    .diferencial-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .diferencial-text {
+      font-size: 1.2rem;
+      max-width: 900px;
+      margin-bottom: var(--spacing-unit);
+      text-align: center;
+      color: var(--dark-gray-text);
+      line-height: 1.8;
+    }
+    .comparacao-imagens {
+      display: flex;
+      gap: var(--spacing-unit);
+      margin-bottom: var(--spacing-unit);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .comparacao-imagens img {
+      width: 320px;
+      max-width: 95%;
+      height: auto;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.4s;
+    }
+    .comparacao-imagens img:hover {
+      transform: scale(1.03);
+    }
+    .beneficios-lista {
+      list-style: none;
+      padding: 0;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .beneficios-lista li {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 0.6rem;
+      font-size: 1.1rem;
+      color: var(--gray-text);
+    }
+    .beneficios-lista li::before {
+      content: "✓";
+      display: inline-block;
+      color: var(--accent-color);
+      font-weight: bold;
+      font-size: 1.3rem;
+      margin-left: -1rem;
+      margin-right: 0.4rem;
+    }
 
-        }
-        .scroll-item:hover {
-            transform: translateY(-8px); /* Elevação maior */
-            box-shadow: 0 8px 18px rgba(0,0,0,0.2); /* Sombra maior */
-        }
+    /* ====== PLANO DE ESTUDOS (OCULTO) ====== */
+    #plano-estudos {
+      display: none;
+    }
 
-        .scroll-item img {
-            width: 85%; /* Aumentei */
-            height: auto;
-            max-height: 150px; /* Aumentei */
-            margin: var(--spacing-unit) auto; /* Margem */
-            object-fit: contain;
-            border-bottom: 1px solid var(--highlight-color); /* Linha separadora */
-        }
+    /* ====== BÔNUS ====== */
+    .bonus-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: calc(var(--spacing-unit) * 1.5);
+      margin-top: calc(var(--spacing-unit) * 2);
+    }
+    .bonus-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background-color: var(--white-background);
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 10px var(--shadow-color);
+      padding: calc(var(--spacing-unit) * 1.2);
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+    .bonus-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    .bonus-item img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: calc(var(--spacing-unit) / 1.5);
+      object-fit: contain;
+      border: 2px solid var(--highlight-color);
+      border-radius: 50%;
+      padding: 0.5rem;
+    }
+    .bonus-info {
+      flex: 1;
+      font-size: 1rem;
+      color: var(--dark-gray-text);
+    }
+    .bonus-info strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-family: var(--heading-font);
+      font-size: 1.2rem;
+      color: var(--heading-color);
+    }
 
-        .item-info {
-           padding: calc(var(--spacing-unit) * 1.25); /* Aumentei */
-            font-size: 1.1rem; /* Aumentei */
-            color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        .item-info h3 {
-             font-family: var(--heading-font);
-            font-size: 1.4rem; /* Aumentei */
-            margin-bottom: 0.75rem; /* Aumentei */
-            color: var(--heading-color);
-        }
+    /* ====== PLANOS (OCULTOS) ====== */
+    #planos {
+      background-color: var(--light-background);
+    }
+    .planos-container {
+      display: none;
+    }
 
-        .item-info p {
-            line-height: 1.6; /* Aumentei */
-        }
+    /* ====== RODAPÉ ====== */
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--gray-text);
+      margin: calc(var(--spacing-unit) * 2.5) 0;
+      padding-top: calc(var(--spacing-unit) * 1.5);
+      border-top: 1px solid var(--highlight-color);
+    }
 
-        /* ============ PLANO ============ */
-       .plano-estudos {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: calc(var(--spacing-unit) * 1.5); /*Aumentei o gap*/
-            text-align: center;
-            background: #fff;
-            border-radius: var(--border-radius);
-            box-shadow: 0 2px 8px var(--shadow-color);
-            padding: calc(var(--spacing-unit) * 2);
+    /* ====== MEDIA QUERIES ====== */
+    @media (max-width: 480px) {
+      .header-container {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+      .header-contact {
+        gap: 0.6rem;
+      }
+      .header-contact a span {
+        display: none;
+      }
+      .header-contact a i {
+        font-size: 1rem;
+      }
+      .sobre-mim {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: calc(var(--spacing-unit) * 1.5);
+      }
+      .sobre-mim-foto {
+        width: 120px;
+        height: 120px;
+        margin-bottom: var(--spacing-unit);
+      }
+      .sobre-mim-text,
+      .diferencial-text {
+        font-size: 1rem;
+        text-align: center;
+      }
+      .nota-numero {
+        font-size: 1.3rem;
+      }
+      .nota-descricao {
+        font-size: 0.9rem;
+      }
+      .comparacao-imagens img {
+        width: 95%;
+        max-width: 280px;
+      }
+      .bonus-item img {
+        width: 60px;
+        height: 60px;
+      }
+      #tutoria-gps .gps-image {
+        max-width: 95%;
+      }
+    }
 
-        }
-        .plano-estudos img {
-           width: 550px; /* Aumentei */
-            max-width: 95vw; /* Aumentei */
-            object-fit: cover;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Sombra */
-            margin-bottom: var(--spacing-unit); /* Margem */
+    @media (min-width: 481px) and (max-width: 768px) {
+      .sobre-mim-text,
+      .diferencial-text {
+        font-size: 1.1rem;
+      }
+      .container {
+        width: 92%;
+      }
+    }
 
-        }
-        .plano-estudos p {
-           max-width: 650px; /* Aumentei */
-            margin: 0 auto;
-            line-height: 1.7; /* Aumentei */
-            color: var(--text-color);
-            font-size: 1.2rem; /* Aumentei */
-        }
-
-        /* ============ BÔNUS ============ */
-        .bonus-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Aumentei */
-            gap: calc(var(--spacing-unit) * 2); /* Aumentei */
-            margin-top: calc(var(--spacing-unit) * 2);
-        }
-        .bonus-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            background: #fff;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 10px var(--shadow-color); /* Sombra */
-            padding: calc(var(--spacing-unit) * 1.5); /* Aumentei */
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transição */
-        }
-
-        .bonus-item:hover {
-            transform: translateY(-8px); /* Elevação maior */
-            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
-        }
-        .bonus-item img {
-            width: 80px; /* Aumentei bastante */
-            height: 80px; /* Aumentei bastante */
-            margin-bottom: calc(var(--spacing-unit) / 1.5);
-            object-fit: contain;
-            border: 2px solid var(--highlight-color); /* Borda */
-            border-radius: 50%; /* Circular */
-            padding: 0.5rem; /* Espaçamento interno */
-        }
-
-        .bonus-info {
-            flex: 1;
-            font-size: 1.1rem;
-            color: var(--text-color);
-        }
-        .bonus-info strong {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-family: var(--heading-font);
-            font-size: 1.2rem;
-            color: var(--heading-color);
-        }
-
-        /* ============ PLANOS ============ */
-        .planos-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Aumentei */
-            gap: calc(var(--spacing-unit) * 1.5);
-            margin-top: calc(var(--spacing-unit) * 2);
-
-        }
-
-       .plano-card {
-             background: #fff;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 10px var(--shadow-color); /* Sombra */
-            padding: calc(var(--spacing-unit) * 1.5); /* Aumentei */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            justify-content: space-between;
-            text-align: center;
-
-        }
-        .plano-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
-        }
-
-        .plano-card h4 {
-            font-family: var(--heading-font);
-            font-size: 1.6rem; /* Aumentei */
-            margin-bottom: calc(var(--spacing-unit) / 2);
-            line-height: 1.3;
-            color: var(--heading-color);
-        }
-        .plano-card p {
-            font-size: 1.1rem;
-            color: var(--text-color);
-            margin-bottom: var(--spacing-unit);
-            line-height: 1.6;
-            flex-grow: 1;
-
-        }
-        .price {
-            font-weight: bold;
-            font-size: 1.6rem;
-            color: var(--heading-color); /* Azul */
-            margin-top: auto;
-            margin-bottom: 0.5rem;
-
-        }
-
-        /* ============ RODAPÉ ============ */
-        footer {
-            text-align: center;
-            font-size: 1rem;
-            color: #666;
-            margin: calc(var(--spacing-unit) * 3) 0; /* Aumentei */
-            padding-top: calc(var(--spacing-unit) * 2);
-            border-top: 1px solid var(--highlight-color); /* Linha separadora */
-
-        }
-
-        /* ============ MEDIA QUERIES ============ */
-        /* Mantive as suas, mas ajustei alguns valores */
-        @media (max-width: 480px) {
-            .header-overlay h1 { font-size: 2rem; }
-            .header-overlay p { font-size: 1.1rem; }
-            .scroll-item { width: 200px; } /*Aumentei um pouco*/
-            .plano-estudos img { width: 100%; }
-            .plano-card h4 { font-size: 1.4rem; }
-            .btn { font-size: 1rem; padding: 0.8rem 1.5rem; }
-            .container { width: 95%; }
-            .notas-container { gap: calc(var(--spacing-unit) / 2); }
-            .nota { min-width: 120px; }
-            .horizontal-scroll-content { padding: calc(var(--spacing-unit) / 2) 0; }
-             .bonus-list { grid-template-columns: 1fr; }
-            .bonus-item { padding: calc(var(--spacing-unit) / 2); }
-            /*Ajustes nos tamanhos de fonte em mobile*/
-            section h2{
-                font-size: 2rem;
-            }
-            .sobre-mim-text, .plano-estudos p {
-                font-size: 1.1rem;
-             }
-             .item-info h3{
-                font-size: 1.3rem;
-             }
-             .item-info, .bonus-info, .plano-card p{
-                 font-size: 1rem;
-             }
-             .nota-numero{
-                font-size: 1.6rem;
-             }
-             .nota-descricao{
-                 font-size: 1rem;
-             }
-        }
-
-        @media (min-width: 481px) and (max-width: 768px) {
-            .header-overlay h1 { font-size: 2.5rem; }
-            .scroll-item { width: 240px; }  /*Aumentei um pouco*/
-            section h2 { font-size: 2.2rem; }
-            .sobre-mim-text, .plano-estudos p { font-size: 1.15rem; }
-            .btn { font-size: 1.1rem; padding: 0.9rem 1.8rem; }
-            .notas-container{
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /*Para tablets*/
-            }
-             .item-info h3{
-                font-size: 1.35rem;
-             }
-        }
-
-        @media (min-width: 1024px) {
-            .container { width: 80%; }
-
-        }
-    </style>
+    @media (min-width: 1024px) {
+      .container {
+        width: 80%;
+      }
+    }
+  </style>
 </head>
 <body>
 
   <!-- CABEÇALHO -->
   <header>
-    <div class="container">
-      <div class="header-overlay">
-        <h1>Mentoria ENEM <span class="keyword">750+</span></h1>
-        <p>Obtenha o direcionamento certo para alavancar seus resultados no <span class="keyword">ENEM/FUVEST</span>. Com <span class="keyword">cronograma personalizado</span> e <span class="keyword">Simulados com IA</span>, você terá clareza dos pontos de melhoria.</p>
-        <div class="btn-group">
-          <a href="#simulados" class="btn">Simulado com IA</a>
-          <a href="#plano-estudos" class="btn">Plano de Estudos</a>
-          <a href="#planos" class="btn">Ver Planos</a>
-        </div>
+    <div class="container header-container">
+      <div class="header-logo">
+        <h1>Tutoria 750+</h1>
       </div>
+      <div class="header-contact">
+        <a href="mailto:estudacom.rodrigo@gmail.com">
+          <i class="fa fa-envelope"></i> <span>estudacom.rodrigo@gmail.com</span>
+        </a>
+        <a href="https://wa.me/5531986569061">
+          <i class="fa fa-whatsapp"></i> <span>WhatsApp</span>
+        </a>
+        <a
+          href="https://www.instagram.com/estudacom.rodrigo?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+          target="_blank"
+          rel="noopener"
+        >
+          <i class="fab fa-instagram"></i> <span>Instagram</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="container nav-bar">
+      <button class="menu-toggle" onclick="toggleMenu()">
+        <i class="fa fa-bars"></i>
+      </button>
+      <nav class="header-nav" id="navbar">
+        <button class="btn-header-nav" onclick="location.href='#sobre-mim'">Sobre Mim</button>
+        <button class="btn-header-nav" onclick="location.href='#diferencial'">Diferencial</button>
+        <button class="btn-header-nav" onclick="location.href='#bonus'">Bônus</button>
+        <button class="btn-header-nav" onclick="location.href='#planos'">Planos</button>
+      </nav>
     </div>
   </header>
 
   <!-- SOBRE MIM -->
-  <section class="sobre-mim">
+  <section id="sobre-mim" class="sobre-mim reveal">
     <div class="container">
-      <h2>Quem sou eu?</h2>
+      <img src="18.png" alt="Foto do Rodrigo" class="sobre-mim-foto">
+      <div class="sobre-mim-content">
+        <h2>Quem sou eu?</h2>
+        <p class="sobre-mim-text">
+          Olá, sou o Rodrigo, apaixonado por ajudar estudantes a superarem desafios em vestibulares, especialmente
+          <span class="keyword">ENEM</span> e <span class="keyword">Fuvest</span>. Dos meus 10 aos 13 anos, quase reprovei em
+          <span class="keyword">Matemática</span> e <span class="keyword">Português</span>, até que decidi buscar novos métodos de estudo por conta própria.
+          Essa mudança rendeu <span class="keyword">6 prêmios consecutivos na OBMEP</span>, conquistas em redação e física, além de notas de destaque
+          no ENEM e na FUVEST, que abriram as portas para a <span class="keyword">UFMG</span> e <span class="keyword">USP</span>.
+        </p>
+        <div class="notas-container">
+          <div class="nota reveal">
+            <div class="nota-numero">700+</div>
+            <div class="nota-descricao">na FUVEST</div>
+          </div>
+          <div class="nota reveal">
+            <div class="nota-numero">770+</div>
+            <div class="nota-descricao">no ENEM</div>
+          </div>
+          <div class="nota reveal">
+            <div class="nota-numero">900+</div>
+            <div class="nota-descricao">em matemática</div>
+          </div>
+          <div class="nota reveal">
+            <div class="nota-numero">920+</div>
+            <div class="nota-descricao">na redação ENEM (por 3 vezes)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TUTORIA GPS -->
+  <section id="tutoria-gps" class="reveal">
+    <div class="container">
+      <h2>Tutoria GPS: para quem busca encontrar o caminho certo</h2>
+      <img src="22.png" alt="Tutoria GPS" class="gps-image hover-scale">
+    </div>
+  </section>
+
+  <!-- PARA QUEM É A TUTORIA -->
+  <section class="sobre-mim reveal">
+    <div class="container">
+      <h2>Para quem é a tutoria?</h2>
       <p class="sobre-mim-text">
-        Estudante da <span class="keyword">USP</span>, apaixonado por <span class="keyword">educação</span> e <span class="keyword">inovação</span>. Aqui você terá a oportunidade de aprender com quem alcançou resultados expressivos e busca sempre evoluir.
+        A tutoria se destina a quem deseja aprovação nas melhores faculdades públicas. Tive experiências de vestibular
+        conciliando trabalho e estudos na <span class="keyword">UFMG</span>, o que me possibilita apoiar tanto iniciantes
+        quanto veteranos na jornada rumo a resultados acima da média.
       </p>
-      <div class="notas-container">
-        <div class="nota">
-          <div class="nota-numero">700+</div>
-          <div class="nota-descricao">na FUVEST</div>
-        </div>
-        <div class="nota">
-          <div class="nota-numero">770+</div>
-          <div class="nota-descricao">no ENEM</div>
-        </div>
-        <div class="nota">
-          <div class="nota-numero">900+</div>
-          <div class="nota-descricao">em matemática</div>
-        </div>
-        <div class="nota">
-          <div class="nota-numero">920+</div>
-          <div class="nota-descricao">na redação ENEM (por 3 vezes)</div>
-        </div>
-        <div class="nota">
-            <div class="nota-numero"></div>
-          <div class="nota-descricao">Vasta experiência em aulas particulares</div>
-        </div>
-        <div class="nota">
-            <div class="nota-numero"></div>
-          <div class="nota-descricao">Programador em Machine Learning e AI</div>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- SIMULADOS COM IA -->
- <section id="simulados">
-    <div class="container">
-      <h2>Simulados com <span class="keyword">IA</span></h2>
-      <div class="horizontal-scroll-container">
-        <button class="scroll-arrow left" aria-label="Rolar para esquerda"><</button>
-        <button class="scroll-arrow right" aria-label="Rolar para direita">></button>
-        <div class="horizontal-scroll-content">
-          <div class="scroll-item">
-            <img src="1.png" alt="Ícone de lupa sobre um relatório.">
-            <div class="item-info">
-              <h3><span class="keyword">Análise Detalhada</span></h3>
-              <p>Relatórios que mapeiam suas falhas e acertos, aproveitando algoritmos de IA para fornecer estatísticas e projeções de pontuação.</p>
-            </div>
-          </div>
-          <div class="scroll-item">
-            <img src="3.png" alt="Ícone de foguete decolando.">
-            <div class="item-info">
-              <h3><span class="keyword">Progresso Acelerado</span></h3>
-              <p>Identifique áreas de melhoria rapidamente e potencialize seus resultados sem perder tempo com o que já domina.</p>
-            </div>
-          </div>
-          <div class="scroll-item">
-            <img src="4.png" alt="Ícone de mão apontando para um gráfico.">
-            <div class="item-info">
-              <h3><span class="keyword">Estratégia de Prova</span></h3>
-              <p>Descubra como otimizar o tempo e criar uma estratégia de resolução de questões para cada disciplina.</p>
-            </div>
-          </div>
-          <div class="scroll-item">
-            <img src="6.png" alt="Ícone de mãos montando um quebra-cabeça.">
-            <div class="item-info">
-              <h3><span class="keyword">Engrenagem Completa</span></h3>
-              <p>Conecte todos os pontos: use os dados dos simulados para integrar estudo teórico, prática e revisão contínua.</p>
-            </div>
-          </div>
-        </div>
+  <!-- DIFERENCIAL -->
+  <section id="diferencial" class="reveal">
+    <div class="container diferencial-container">
+      <h2>O diferencial é a individualidade</h2>
+      <p class="diferencial-text">
+        Meu objetivo é fornecer um acompanhamento <span class="keyword">100% individualizado</span>. Em muitas plataformas,
+        quando você erra, tudo se resume a “você errou uma questão de biologia molecular”. Aqui, cada erro será analisado
+        para identificar e corrigir as suas reais lacunas.
+      </p>
+      <div class="comparacao-imagens">
+        <img src="16.png" alt="Método tradicional de ensino" class="reveal hover-scale">
+        <img src="17.png" alt="Tutoria individualizada" class="reveal hover-scale">
       </div>
+      <ul class="beneficios-lista reveal">
+        <li>Simulados feitos para você.</li>
+        <li>Questões adaptadas para evitar acertos por mera repetição.</li>
+        <li>Plano de estudos <span class="keyword">personalizado</span>.</li>
+        <li>Apoio emocional até o dia da prova.</li>
+        <li>Foco em rotina e constância nos estudos.</li>
+        <li>Simulados curtos e direcionados.</li>
+        <li>Organização para suas revisões.</li>
+        <li>Estratégias de estudo para potencializar resultados.</li>
+      </ul>
     </div>
   </section>
 
-  <!-- PLANO DE ESTUDOS COM IA -->
-  <section id="plano-estudos">
-    <div class="plano-estudos container">
-      <h2>Plano de Estudos com <span class="keyword">IA</span></h2>
-      <img src="7.png" alt="Ilustração de plano de estudos.">
-      <p>Um guia adaptável que muda de acordo com seu desempenho, rotina, dificuldades e preferências pessoais. À medida que os meses passam, o plano se ajusta para garantir que você avance com consistência e motivação, mantendo foco nas matérias mais críticas.</p>
-    </div>
+  <!-- PLANO DE ESTUDOS COM IA (OCULTO) -->
+  <section id="plano-estudos" class="plano-estudos container">
+    <!-- Mantido oculto -->
   </section>
 
   <!-- BÔNUS -->
-  <section>
+  <section id="bonus" class="reveal">
     <div class="container">
       <h2><span class="keyword">Bônus</span>*</h2>
       <div class="bonus-list">
-        <div class="bonus-item">
-          <img src="9.png" alt="Ícone representando a mentoria sem fidelidade.">
+        <div class="bonus-item reveal">
+          <img src="9.png" alt="Ícone representando a tutoria sem fidelidade.">
           <div class="bonus-info">
-            <strong>Mentoria <span class="keyword">sem fidelidade</span></strong>
+            <strong>Tutoria <span class="keyword">sem fidelidade</span></strong>
             Continue apenas se fizer sentido para você. Mais liberdade para focar no que realmente importa.
           </div>
         </div>
-        <div class="bonus-item">
+        <div class="bonus-item reveal">
           <img src="8.png" alt="Ícone representando um mini curso de interpretação matemática.">
           <div class="bonus-info">
             <strong>Mini curso de <span class="keyword">interpretação matemática</span>*</strong>
             Aprenda a decifrar enunciados e ganhar tempo nas questões mais complexas de exatas.
           </div>
         </div>
-        <div class="bonus-item">
+        <div class="bonus-item reveal">
           <img src="13.png" alt="Ícone de IA, representando mini curso sobre uso de IA para estudar.">
           <div class="bonus-info">
             <strong>Mini curso: Usando <span class="keyword">IA</span> para estudar*</strong>
             Estratégias práticas para utilizar ferramentas de IA a favor do seu aprendizado.
           </div>
         </div>
-        <div class="bonus-item">
+        <div class="bonus-item reveal">
           <img src="12.png" alt="Ícone representando aulas particulares.">
           <div class="bonus-info">
             <strong>Acesso a <span class="keyword">aulas particulares</span>*</strong>
-            Disponível para Redação, Literatura (Fuvest), Física e Matemática básica.  Complemente seus estudos com suporte dedicado.
+            Redação, Literatura (Fuvest), Física e Matemática básica. Suporte dedicado no que você mais precisar.
           </div>
         </div>
       </div>
@@ -636,33 +744,21 @@
     </div>
   </section>
 
-  <!-- PLANOS DA MENTORIA -->
+  <!-- PLANOS DA TUTORIA (OCULTO) -->
   <section id="planos">
-    <div class="container">
-      <h2>Planos da Mentoria</h2>
+    <div class="container reveal">
+      <h2>Tutoria a partir de R$35,00/mês</h2>
       <p class="text-center mb-1" style="font-size:1rem; color: #777;">
-        <em>Valores em preço social (50% de desconto) por tempo limitado*</em>
+        <em>Planos individuais pensados em você</em>
       </p>
-      <div class="planos-container">
-        <div class="plano-card">
-          <h4>Primeira Aula</h4>
-          <p>Faça o simulado de IA e entenda como melhorar e aumentar seus acertos de forma precisa.</p>
-          <div class="price">R$ 25,00</div>
-        </div>
-        <div class="plano-card">
-          <h4>Acompanhamento</h4>
-          <p>Opções semanais, quinzenais ou mensais. Mantenha a consistência, receba suporte psicológico e desenvolva estratégias.</p>
-          <div class="price">R$ 20,00/mentoria</div>
-        </div>
-        <div class="plano-card">
-          <h4>Aulas Particulares</h4>
-          <p>Aprofunde-se em Literatura (Fuvest), Física, Matemática básica e Redação. Construa uma base sólida.</p>
-          <div class="price">R$ 20,00/aula</div>
-        </div>
-      </div>
-
       <div class="text-center mt-2">
-        <a href="https://wa.me/5531986569061?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20suas%20aulas%21" class="btn" style="font-size:1.2rem;">Entrar em contato</a>
+        <a
+          href="https://wa.me/5531986569061?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20suas%20aulas%21"
+          class="btn"
+          style="font-size:1.2rem;"
+        >
+          Garanta a primeira aula com 28% OFF
+        </a>
       </div>
     </div>
   </section>
@@ -674,49 +770,50 @@
     </div>
   </footer>
 
-    <script>
-        // JavaScript para controlar o scroll horizontal com as setas
-        document.addEventListener('DOMContentLoaded', function() {
-            const containers = document.querySelectorAll('.horizontal-scroll-container');
+  <!-- BOTÃO VOLTAR AO TOPO -->
+  <button id="back-to-top"><i class="fa fa-chevron-up"></i></button>
 
-            containers.forEach(container => {
-                const content = container.querySelector('.horizontal-scroll-content');
-                const leftArrow = container.querySelector('.scroll-arrow.left');
-                const rightArrow = container.querySelector('.scroll-arrow.right');
+  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('navbar');
+      nav.classList.toggle('open');
+    }
 
-                if (!content || !leftArrow || !rightArrow) {
-                    console.warn("Elementos de scroll não encontrados em:", container);
-                    return; // Sai da função para este container
-                }
+    // Exibir/ocultar botão "Voltar ao topo"
+    window.addEventListener('scroll', () => {
+      const btnTop = document.getElementById('back-to-top');
+      if (window.scrollY > 300) {
+        btnTop.style.display = 'flex';
+      } else {
+        btnTop.style.display = 'none';
+      }
+    });
 
-                // Função para verificar se precisa mostrar/esconder as setas
-                const checkArrows = () => {
-                    leftArrow.style.display = content.scrollLeft > 0 ? 'block' : 'none';
-                    rightArrow.style.display = (content.scrollLeft + content.clientWidth) < content.scrollWidth ? 'block' : 'none';
-                };
+    // Rolar até o topo ao clicar no botão
+    document.getElementById('back-to-top').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
-                // Event listeners para as setas
-                leftArrow.addEventListener('click', () => {
-                    content.scrollBy({ left: -280, behavior: 'smooth' }); // Ajuste conforme a largura dos seus itens
-                });
+    // Intersection Observer para animações "reveal" ao rolar a página
+    const revealElements = document.querySelectorAll('.reveal');
+    const observerConfig = {
+      threshold: 0.1
+    };
 
-                rightArrow.addEventListener('click', () => {
-                    content.scrollBy({ left: 280, behavior: 'smooth' }); // Ajuste conforme a largura
-                });
+    const revealOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerConfig);
 
-                // Verifica as setas quando a página carrega e quando o scroll acontece.
-                checkArrows();
-                content.addEventListener('scroll', checkArrows);
-
-                //Verifica se há necessidade de mostrar a seta.  Se o conteúdo couber, esconde.
-                if (content.scrollWidth <= content.clientWidth){
-                     leftArrow.style.display = 'none';
-                     rightArrow.style.display = 'none';
-                }
-            });
-        });
-
-    </script>
-
+    revealElements.forEach(el => {
+      revealOnScroll.observe(el);
+    });
+  </script>
 </body>
 </html>
+```
